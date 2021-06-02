@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<h:body>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem />
+			<p:menuitem value="Pagina com JSF" action="index.xhtml" />
+			<p:menuitem value="Pagina com Primefaces" action="primefaces.xhtml" />
+		</p:breadCrumb>
+	</h:form>
+
+	<h:form id="formdados">
+		<h:messages showDetail="true" showSumary="false" id="msg" />
+		<p:panelGrid columns="2">
+			<h:outputLabel>Código</h:outputLabel>
+			<p:inputText readonly="true"
+				value="#{usuarioManagedBean.usuarioPessoa.cod}" />
+			<p:outputLabel>Nome</p:outputLabel>
+			<p:inputText value="#{usuarioManagedBean.usuarioPessoa.nome}"
+				required="true" requiredMessage="Nome é obrigatório!" />
+			<h:outputLabel>Senha</h:outputLabel>
+			<h:inputText value="#{usuarioManagedBean.usuarioPessoa.senha}" />
+			<h:outputLabel>Sobre Nome</h:outputLabel>
+			<h:inputText value="#{usuarioManagedBean.usuarioPessoa.sobrenome}" />
+		</p:panelGrid>
+		<p:commandButton value="Salvar" action="#{usuarioManagedBean.salvar}" />
+		<p:commandButton value="Novo" action="#{usuarioManagedBean.novo}" />
+	</h:form>
+
+	<h:form id="formtabela">
+		<p:dataTable value="#{usuarioManagedBean.list}" var="usu">
+			<p:column>
+				<h:outputText value="#{usu.cod}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{usu.nome}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{usu.senha}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{usu.sobrenome}" />
+			</p:column>
+			<p:column>
+				<h:commandLink immediate="true" id="botaoeditar">
+					<h:graphicImage url="resources/img/editar-mensagem.png" />
+					<f:setPropertyActionListener
+						target="#{usuarioManagedBean.usuarioPessoa}" value="#{usu}" />
+					<f:ajax execute="botaoeditar" render=":formdados" />
+				</h:commandLink>
+			</p:column>
+			<p:column>
+				<p:commandLink id="botaoexcluir" immediate="true"
+					action="#{usuarioManagedBean.deletarID}">
+					<h:graphicImage url="resources/img/deletar-usuario.png" />
+					<f:ajax execute="botaoexcluir" render="@form :formdados:msg" />
+					<f:setPropertyActionListener value="#{usu}"
+						target="#{usuarioManagedBean.usuarioPessoa}" />
+				</p:commandLink>
+			</p:column>
+			<p:column>
+				<h:commandLink imediate="true" action="telefone.xhtml"
+					id="botaotelefone">
+					<h:graphicImage url="resources/img/deletar-usuario.png" />
+					<f:param name="codigousuario" value="#{usu.cod}" />
+				</h:commandLink>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+
+</html>

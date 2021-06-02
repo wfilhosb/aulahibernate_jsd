@@ -6,14 +6,14 @@
 <h:head></h:head>
 
 <h:body>
-	<h:outputLabel>Olá JSF</h:outputLabel>
 	<h:form>
+	<h:messages showDetail="true" />
 		<h:panelGrid columns="2">
 			<h:outputLabel>Código</h:outputLabel>
 			<h:inputText readonly="true"
 				value="#{usuarioManagedBean.usuarioPessoa.cod}" />
 			<h:outputLabel>Nome</h:outputLabel>
-			<h:inputText value="#{usuarioManagedBean.usuarioPessoa.nome}" />
+			<h:inputText value="#{usuarioManagedBean.usuarioPessoa.nome}" required="true" requiredMessage="Nome é obrigatório!" />
 			<h:outputLabel>Senha</h:outputLabel>
 			<h:inputText value="#{usuarioManagedBean.usuarioPessoa.senha}" />
 			<h:outputLabel>Sobre Nome</h:outputLabel>
@@ -42,7 +42,7 @@
 				</h:commandLink>
 			</h:column>
 			<h:column>
-				<h:commandLink value="Excluir"
+				<h:commandLink 
 					action="#{usuarioManagedBean.deletarID}">
 					<f:setPropertyActionListener value="#{usu}"
 						target="#{usuarioManagedBean.usuarioPessoa}" />

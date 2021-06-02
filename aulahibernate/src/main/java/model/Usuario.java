@@ -17,12 +17,6 @@ public class Usuario {
 	private String senha;
 	private String sobrenome;
 
-	// aqui se usa o mappedBy apontando para o objeto que foi referenciado na classe
-	// TELEFONE
-	// não estava funcionando por causa da letra maiúscula, não fazemos a referencia
-	// a classe
-	// e sim ao objeto que se chama usuario, para cada usuario criado, mapeamos um
-	// objeto
 	@OneToMany(mappedBy = "usuario")
 	private List<Telefone> TelUsuario;
 
@@ -70,4 +64,29 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [cod=" + cod + ", nome=" + nome + ", senha=" + senha + ", sobrenome=" + sobrenome + "]";
 	}
+
+	// Hashcode utilizado em COLLECTIONS, arraylists, cria um código para agrupar objetos semelhantes
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (cod ^ (cod >>> 32));
+		return result;
+	}
+
+	//verifica se a lista já contem o objeto
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (cod != other.cod)
+			return false;
+		return true;
+	}
+
 }

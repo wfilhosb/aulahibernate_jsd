@@ -29,7 +29,8 @@ public class DaoGeral<E> {
 		return e;
 	}
 
-	public void delatarID(E entidade) {
+	//adicionamos o throws exception para subir a excessão
+	public void delatarID (E entidade) throws Exception{
 		Object id = HibernateUtil.getPrimaryKey(entidade);
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
