@@ -17,6 +17,7 @@ public class Usuario {
 	private String senha;
 	private String sobrenome;
 
+	//um usuario para N telefones
 	@OneToMany(mappedBy = "usuario")
 	private List<Telefone> TelUsuario;
 

@@ -21,6 +21,7 @@ public class Telefone {
 	@Column(nullable = false)
 	private String tipo;
 
+	//Muitos telefones para um Usuario, este recebe a FK lá no banco
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private Usuario usuario;
 

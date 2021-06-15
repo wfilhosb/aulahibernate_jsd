@@ -25,6 +25,7 @@ public class DaoGeral<E> {
 	}
 
 	public E pesquisar(Long id, Class<E> entidade) {
+		entityManager.clear();
 		E e = (E) entityManager.find(entidade, id);
 		return e;
 	}
