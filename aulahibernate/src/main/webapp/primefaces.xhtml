@@ -33,6 +33,16 @@
 		<p:commandButton value="Novo" action="#{usuarioManagedBean.novo}" />
 	</h:form>
 
+	<h:form>
+		<p:panel header="Consultar Usuário">
+			<p:panelGrid columns="3">
+				<h:outputLabel value="Nome:" />
+				<p:inputText value="#{usuarioManagedBean.pesquisa}" />
+				<p:commandButton value="Buscar" actionListener="#{usuarioManagedBean.pesquisar}" update="formtabela"/>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+
 	<h:form id="formtabela">
 		<p:dataTable value="#{usuarioManagedBean.list}" var="usu">
 			<p:column>

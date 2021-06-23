@@ -17,6 +17,7 @@ public class UsuarioManagedBean {
 	private Usuario usuarioPessoa = new Usuario();
 	private List<Usuario> list = new ArrayList<Usuario>();
 	private DaoUsuario<Usuario> daoGeral = new DaoUsuario<Usuario>();
+	private String pesquisa;
 	
 	//criação do método post construct, vai consultar apenas uma vez no banco
 	@PostConstruct
@@ -39,6 +40,10 @@ public class UsuarioManagedBean {
 		//mensagem de salvamento com sucesso;
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Informação: ","Salvo com sucesso!"));
 		return "";
+	}
+	
+	public void pesquisar() {
+		list = daoGeral.pesquisarnome(pesquisa);
 	}
 
 	public String novo() {
@@ -69,5 +74,13 @@ public class UsuarioManagedBean {
 	public List<Usuario> getList() {
 		//aqui teremos apenas um return list, era assim daoGeral.listar(Usuario.class);
 		return list;
+	}
+	
+	public String getPesquisa() {
+		return pesquisa;
+	}
+	
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
 	}
 }

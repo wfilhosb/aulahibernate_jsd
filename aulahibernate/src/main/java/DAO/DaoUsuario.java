@@ -1,5 +1,9 @@
 package DAO;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import model.Usuario;
 
 public class DaoUsuario<E> extends DaoGeral<Usuario> {
@@ -10,5 +14,10 @@ public class DaoUsuario<E> extends DaoGeral<Usuario> {
 		getEntityManager().getTransaction().commit();
 		//HERANÇA aplicada
 		super.delatarID(usuario);
+	}
+
+	public List<Usuario> pesquisarnome(String pesquisa) {
+		Query query = super.getEntityManager().createQuery("from Usuario where nome like '%"+pesquisa+"%'");
+		return query.getResultList();
 	}
 }
